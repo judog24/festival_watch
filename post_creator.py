@@ -3,7 +3,7 @@ import time
 from random import randrange
 from datetime import datetime, timezone, timedelta
 
-DAY = '2023-04-14'
+DAY = '2023-04-15'
 posts = []
 
 def convert_time(day, csv_time):
@@ -29,7 +29,7 @@ def livestream_lineup():
             posts.append([content, scheduled_time])
 
 def lineup():
-    with open('weekend_1_day_1-sets.csv', newline='') as csvfile:
+    with open('weekend_1_day_2-sets.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
     
         for row in reader:
@@ -49,5 +49,6 @@ def lineup():
                     scheduled_time = convert_time(DAY,row['end'])
                     posts.append([content, scheduled_time])
 
-livestream_lineup()
+#livestream_lineup()
+#lineup()
 export_posts(posts)
