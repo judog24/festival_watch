@@ -20,7 +20,7 @@ def export_posts(posts):
             file.write("mastodon.status_post(status='%s', scheduled_at=datetime.fromtimestamp(%s)) \n" % (post[0], post[1]))
 
 def livestream_lineup():
-    with open('weekend_1_day_2-livestream.csv', newline='') as csvfile:
+    with open('weekend_1_day_3-livestream.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
@@ -49,6 +49,6 @@ def lineup():
                     scheduled_time = convert_time(DAY,row['end'])
                     posts.append([content, scheduled_time])
 
-#livestream_lineup()
+livestream_lineup()
 #lineup()
 export_posts(posts)
