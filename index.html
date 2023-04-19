@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Description to CSV</title>
+    <style>
+      #dataArea {
+        display: flex;
+        flex-direction:column;
+        margin: 25px;
+        gap: 10px;
+      }
+
+      #csvData {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="post" id="dataArea" name="dataArea" onsubmit="formatData(); return false;">
+      
+      <label for="stage">Choose a stage: </label>
+      <select name="stage" id="stage">
+        <option value="Coachella Stage,https://www.youtube.com/live/3ti6RRk-OVQ">Coachella Stage</option>
+        <option value="Outdoor Theater,https://www.youtube.com/watch?v=3C57SwK9QvY">Outdoor Theater</option>
+        <option value="Sahara,https://www.youtube.com/watch?v=o7q7ahC5eMI">Sahara</option>
+        <option value="Mojave,https://www.youtube.com/watch?v=dZgeMO52kvg">Mojave</option>
+        <option value="Gobi,https://www.youtube.com/watch?v=7Zv5aSik3Fk">Gobi</option>
+        <option value="Yuma,https://www.youtube.com/watch?v=RzFS36bQvv0">Yuma</option>
+        <option value="Sonora,url">Sonora</option>
+      </select>
+
+      <label for="pastedData">Paste data from description here: </label>
+      <textarea id="pastedData" name="pastedData" form="dataArea"></textarea>
+
+      <input type="submit" value="Submit">
+    </form>
+
+    <div id="container">
+      <div id="csvData">
+
+      </div>
+      <button id="btnClip" type="button" hidden>copy to clipboard</button>
+    </div>
+  </body>
+  <script>
+    function formatData() {
+      container = document.getElementById('container');
+      btnClip = document.getElementById('btnClip');
+      csvData = document.getElementById('csvData');
+      stage = document.getElementById('stage').value;
+      pastedData = document.getElementById('pastedData');
+      rawTimes = pastedData.value.split("\n");
+      parsedTimes = [];
+      formattedTimes = [];
+      cleanData = '';
+
+      rawTimes.forEach(element => {
+        if (element != '') {
+          // ['4:45', 'Porter Robinson']
+          parsedTimes.push(element)
+        }
+      })
+
+      parsedTimes.forEach(time => {
+        cleanTimes = time.split('pm - ');
+        formattedTime = (cleanTimes[1] + ',' + cleanTimes[0] + ' PM,' + stage + '<br>');
+        // Eric Prydz presents HOLO,10:20 PM,Outdoor Theater,https://www.youtube.com/watch?v=3C57SwK9QvY
+        formattedTimes.push(formattedTime)
+      })
+
+      formattedTimes.forEach(time => {
+        cleanData += time;
+      })
+
+      csvData.innerHTML = cleanData;
+      btnClip.removeAttribute('hidden');
+
+      btnClip.addEventListener("click", (event) => {
+        navigator.clipboard.writeText(csvData.innerText);
+      })
+    }
+  </script>
+</html>
