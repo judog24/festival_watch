@@ -17,7 +17,7 @@ def convert_time(day, csv_time):
 def export_posts(posts):
     with open('posts.py', 'w') as file:
         for post in posts:
-            file.write("mastodon.status_post(status='%s', scheduled_at=datetime.fromtimestamp(%s)) \n" % (post[0], post[1]))
+            file.write("mastodon.status_post(status=\"%s\", scheduled_at=datetime.fromtimestamp(%s)) \n" % (post[0], post[1]))
 
 def livestream_lineup():
     with open('weekend_1_day_3-livestream.csv', newline='') as csvfile:
