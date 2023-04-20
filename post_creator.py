@@ -49,6 +49,6 @@ def lineup():
                     scheduled_time = convert_time(DAY,row['end'])
                     posts.append([content, scheduled_time])
 
-livestream_lineup()
-#lineup()
+#livestream_lineup()
+lineup()
 export_posts(posts)
