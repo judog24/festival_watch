@@ -25,4 +25,6 @@ jobs:
     - name: Run post_creator.py
       env: 
         FESTIVAL_WATCH_BOT: ${{ secrets.FESTIVAL_WATCH_BOT }}
-      run: python action_bot.py
+      run: |
+        echo $FESTIVAL_WATCH_BOT > festival_usercred.secret
+        python bot.py
