@@ -44,3 +44,7 @@ File "C:\Python310\lib\encodings\cp1252.py", line 23, in decode
     return codecs.charmap_decode(input,self.errors,decoding_table)[0]
 UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 263: character maps to <undefined>
 `
+
+## Notes
+
+This bot schedules hundreds of posts a day during the festival. By default Mastodon only allows 25 scheduled posts per day. As the owner of the Mastodon instance this bot is hosted on, I modified the Mastodon source code to increase the number of posts that can be scheduled. It's a simple adjustment that is [explained here](https://gist.github.com/judog24/0a4d28c1b263b0f89ae7d337bc626804).
