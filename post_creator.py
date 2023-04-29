@@ -3,7 +3,7 @@ import time
 from random import randrange
 from datetime import datetime, timezone, timedelta
 
-DAY = '2023-04-21'
+DAY = '2023-04-23'
 posts = []
 
 def convert_time(day, csv_time):
@@ -20,7 +20,7 @@ def export_posts(posts):
             file.write("mastodon.status_post(status=\"%s\", scheduled_at=datetime.fromtimestamp(%s)) \n" % (post[0], post[1]))
 
 def livestream_lineup():
-    with open('weekend_2_day_1-livestream.csv', newline='') as csvfile:
+    with open('weekend_2_day_3-livestream.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
@@ -29,7 +29,7 @@ def livestream_lineup():
             posts.append([content, scheduled_time])
 
 def lineup():
-    with open('weekend_2_day_1-sets.csv', newline='') as csvfile:
+    with open('weekend_2_day_3-sets.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
     
         for row in reader:
@@ -49,6 +49,6 @@ def lineup():
                     scheduled_time = convert_time(DAY,row['end'])
                     posts.append([content, scheduled_time])
 
-#livestream_lineup()
-lineup()
+livestream_lineup()
+#lineup()
 export_posts(posts)
